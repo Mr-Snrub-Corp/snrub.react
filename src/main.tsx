@@ -10,12 +10,12 @@ import Login from './pages/auth/Login.tsx'
 
 const router = createBrowserRouter([
   { path: '/', element: <HomeView /> },
+  { path: '/auth/login', element: <Login /> },
   {
     element: <App />,
     children: [
       { path: '/dashboard', element: <Dashboard /> },
       { path: '/settings', element: <Settings /> },
-      { path: '/auth/login', element: <Login /> },
     ],
   },
 ])
