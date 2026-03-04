@@ -5,7 +5,7 @@ function App() {
     <div className="mx-auto max-w-5xl p-8">
       <nav className="mb-8 flex gap-4">
         <NavLink
-          to="/"
+          to="/dashboard"
           className={({ isActive }) =>
             isActive ? 'text-primary underline' : 'text-muted-foreground hover:text-foreground'
           }

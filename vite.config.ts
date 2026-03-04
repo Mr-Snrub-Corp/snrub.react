@@ -12,6 +12,9 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5173, // Change this to your desired port
+    port: 5173,
+    watch: {
+      usePolling: true,
+    },
   },
 });
