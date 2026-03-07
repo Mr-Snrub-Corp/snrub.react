@@ -1,0 +1,30 @@
+---
+description: React frontend repository structure
+alwaysApply: true
+---
+
+# Repository Overview
+
+React 19 + Vite 7 + TypeScript SPA. React Router 7 (library mode). Talks to a Python API backend.
+
+## Project Structure
+
+```
+src/
+├── assets/          # Static assets, CSS
+├── components/
+│   └── ui/          # shadcn/ui components (owned source, not node_modules)
+├── lib/             # Shared utilities (e.g. cn() from utils.ts)
+├── pages/           # Page-level components (e.g. auth/, dashboard/)
+├── services/        # API services and HTTP client
+├── stores/          # State (local hooks; no global state library)
+├── types/           # TypeScript type definitions
+public/              # Public static assets
+e2e/                 # Playwright end-to-end tests
+```
+
+## Key Files
+
+- `src/main.tsx` — entry point, BrowserRouter + route definitions
+- `src/App.tsx` — root layout (nav + `<Outlet />`)
+- `components.json` — shadcn/ui CLI configuration

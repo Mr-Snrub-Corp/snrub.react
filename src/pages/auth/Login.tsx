@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { useForm } from '@tanstack/react-form'
+import { useAuthStore } from '@/stores/auth'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { useNavigate } from "react-router";
 
 const loginSchema = z.object({
   email: z.email({ error: 'Please enter a valid email address' }),
@@ -17,6 +19,8 @@ function Login() {
   }, [])
 
   const [serverError, setServerError] = useState('')
+  const login = useAuthStore((s) => s.login)
+  let navigate = useNavigate();
 
   const form = useForm({
     defaultValues: { email: '', password: '' },
@@ -24,8 +28,8 @@ function Login() {
     onSubmit: async ({ value }) => {
       setServerError('')
       try {
-        // TODO: replace with auth store / API call
-        console.log('Login:', value)
+        await login(value.email, value.password)
+        navigate('/dashboard')
       } catch (error) {
         setServerError(error instanceof Error ? error.message : 'Login failed')
       }

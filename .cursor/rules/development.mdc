@@ -1,0 +1,43 @@
+---
+description: Development style, communication, docs, no speculative code, build validation
+alwaysApply: true
+---
+
+# Development
+
+## Communication Style
+
+In all interactions and commit messages, be extremely concise and sacrifice grammar for the sake of concision. Avoid flattery.
+
+## Development Style
+
+- Follow DRY principles.
+- Use shadcn/ui components whenever possible.
+  - Add components: `npx shadcn@latest add <name>`
+  - Component docs (AI-optimised): `https://ui.shadcn.com/docs/components/<name>.md`
+  - LLM index: `https://ui.shadcn.com/llms.txt`
+  - Components live in `src/components/ui/` — owned source, edit directly.
+- Use Tailwind v4 utility classes.
+- Enterprise best practices. Interfaces in `types/`, derived from constants when appropriate. Reused patterns in custom hooks, not components.
+
+## No Speculative or "Convenience" Code
+
+- Do NOT add code that is not immediately used. Every line must be called or referenced.
+- Do NOT add re-exports or abstractions "for convenience" unless explicitly requested.
+- Consult with user before adding helper functions, utility wrappers.
+- Do NOT anticipate future needs. Write only what is required for the current task.
+- Follow existing project patterns exactly. Do not introduce new patterns or conventions without consultation.
+
+If you write code, something must call it. If nothing calls it, don't write it.
+
+## General Documentation Standards
+
+- Write clear, concise documentation that explains both what and why.
+- MCP server config: `.cursor/mcp.json` (project-level; optional `~/.cursor/mcp.json` for global).
+- Use markdown format for all documentation files.
+- Include code examples where applicable.
+- Keep documentation up-to-date with code changes.
+
+## Build & Validation
+
+After every code change, validate the build succeeds: run `npm run build` (or the project build script) before considering the task complete.

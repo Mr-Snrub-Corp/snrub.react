@@ -1,0 +1,24 @@
+---
+description: Testing, npm, typing, linting
+alwaysApply: true
+---
+
+# Development Tools
+
+## Testing
+
+### Unit Tests
+
+- Unit tests for helpers, hooks, or components in isolation.
+- Co-locate with file under test: `[NameOfComponent].unit.spec.ts`.
+- No test framework configured yet; consult before adding one.
+- Quality over quantity.
+
+## Node / JS / TypeScript
+
+- Use npm for package management.
+
+## Typing and Linting
+
+- Prettier for formatting.
+- Do not use type `any`.
