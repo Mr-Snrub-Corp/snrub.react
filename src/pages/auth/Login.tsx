@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
+import { AppLogo } from '@/components/AppLogo'
 import { useForm } from '@tanstack/react-form'
 import { useAuthStore } from '@/stores/auth'
 import { z } from 'zod'
@@ -45,10 +46,7 @@ function Login() {
       <div className="flex w-full flex-col justify-center p-12 md:w-1/2 md:p-20">
         <div className="mb-8">
           <Link to="/" className="mb-4 inline-block">
-            {/* TODO: replace with DashboardLogo component */}
-            <div className="flex size-14 items-center justify-center rounded-lg bg-primary text-xl font-bold text-primary-foreground">
-              S
-            </div>
+            <AppLogo size={56} />
           </Link>
           <h1 className="mb-2 text-3xl font-medium text-foreground">Welcome Back</h1>
         </div>
