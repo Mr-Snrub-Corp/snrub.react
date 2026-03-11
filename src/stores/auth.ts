@@ -1,3 +1,4 @@
+import { isAxiosError } from "axios";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { User } from "../types/user";
@@ -22,9 +23,15 @@ export const useAuthStore = create<AuthState>()(
       clearAuth: () => set({ token: null, user: null }),
       setUser: (user) => set({ user }),
       login: async (email: string, password: string) => {
-        const res = await authApi.login({ email, password });
-        const data = res as AuthResponse;
-        set({ user: data.user, token: data.access_token });
+        try {
+          const data: AuthResponse = await authApi.login({ email, password });
+          set({ user: data.user, token: data.access_token });
+        } catch (error) {
+          const message = isAxiosError(error)
+            ? (error.response?.data?.detail ?? error.message)
+            : "Login failed";
+          throw new Error(message);
+        }
       },
     }),
     { name: "auth" },
