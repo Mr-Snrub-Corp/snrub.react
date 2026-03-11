@@ -125,7 +125,7 @@ function Login() {
             </p>
           )}
 
-          <Button type="submit" className="w-full" disabled={form.state.isSubmitting}>
+          <Button type="submit" variant="primary" className="w-full" disabled={form.state.isSubmitting}>
             Sign in
           </Button>
           <Button

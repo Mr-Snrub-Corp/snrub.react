@@ -10,6 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
@@ -19,6 +20,18 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        success:
+          "bg-success-600 text-white hover:bg-success-600/90 focus-visible:ring-success-500/20 dark:bg-success-500 dark:hover:bg-success-500/90 dark:focus-visible:ring-success-500/40",
+        warn:
+          "bg-warn-500 text-warn-950 hover:bg-warn-500/90 focus-visible:ring-warn-400/20 dark:focus-visible:ring-warn-400/40",
+        info:
+          "bg-info-600 text-white hover:bg-info-600/90 focus-visible:ring-info-500/20 dark:bg-info-500 dark:hover:bg-info-500/90 dark:focus-visible:ring-info-500/40",
+        help:
+          "bg-help-600 text-white hover:bg-help-600/90 focus-visible:ring-help-500/20 dark:bg-help-500 dark:hover:bg-help-500/90 dark:focus-visible:ring-help-500/40",
+        danger:
+          "bg-danger-600 text-white hover:bg-danger-600/90 focus-visible:ring-danger-500/20 dark:bg-danger-500 dark:hover:bg-danger-500/90 dark:focus-visible:ring-danger-500/40",
+        contrast:
+          "bg-contrast-950 text-contrast-50 hover:bg-contrast-950/90 dark:bg-contrast-50 dark:text-contrast-950 dark:hover:bg-contrast-50/90",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
