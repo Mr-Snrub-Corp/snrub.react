@@ -2,6 +2,7 @@ import { Outlet } from "react-router";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/DashboardSidebar";
 import { DashboardNavbar } from "@/components/DashboardNavbar";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function DashboardLayout() {
   return (
@@ -11,6 +12,7 @@ export default function DashboardLayout() {
         <DashboardNavbar />
         <main className="flex-1 p-8">
           <Outlet />
+          <Toaster />
         </main>
       </div>
     </SidebarProvider>

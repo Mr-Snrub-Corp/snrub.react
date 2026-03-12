@@ -1,67 +1,74 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router'
-import { AppLogo } from '@/components/AppLogo'
-import { useForm } from '@tanstack/react-form'
-import { useAuthStore } from '@/stores/auth'
-import { z } from 'zod'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
+import { AppLogo } from "@/components/AppLogo";
+import { useForm } from "@tanstack/react-form";
+import { useAuthStore } from "@/stores/auth";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 import { useNavigate } from "react-router";
 
 const loginSchema = z.object({
-  email: z.email({ error: 'Please enter a valid email address' }),
-  password: z.string().min(1, { error: 'Password is required' }),
-})
+  email: z.email({ error: "Please enter a valid email address" }),
+  password: z.string().min(1, { error: "Password is required" }),
+});
 
 function Login() {
   useEffect(() => {
-    document.title = 'Snrub Corp | Login'
-  }, [])
+    document.title = "Snrub Corp | Login";
+  }, []);
 
-  const [serverError, setServerError] = useState('')
-  const login = useAuthStore((s) => s.login)
+  const [serverError, setServerError] = useState("");
+  const login = useAuthStore((s) => s.login);
   let navigate = useNavigate();
 
   const form = useForm({
-    defaultValues: { email: '', password: '' },
+    defaultValues: { email: "", password: "" },
     validators: { onSubmit: loginSchema },
     onSubmit: async ({ value }) => {
-      setServerError('')
+      setServerError("");
       try {
-        await login(value.email, value.password)
-        navigate('/dashboard')
+        await login(value.email, value.password);
+        navigate("/dashboard");
       } catch (error) {
-        setServerError(error instanceof Error ? error.message : 'Login failed')
+        setServerError(error instanceof Error ? error.message : "Login failed");
       }
     },
-  })
+  });
 
   function handleGoogleLogin() {
-    window.location.href = import.meta.env.VITE_GOOGLE_LOGIN_URL
+    window.location.href = import.meta.env.VITE_GOOGLE_LOGIN_URL;
   }
 
   return (
-    <div className="flex h-screen w-full bg-background">
+    <div className="bg-background flex h-screen w-full">
       <div className="flex w-full flex-col justify-center p-12 md:w-1/2 md:p-20">
         <div className="mb-8">
           <Link to="/" className="mb-4 inline-block">
             <AppLogo size={56} />
           </Link>
-          <h1 className="mb-2 text-3xl font-medium text-foreground">Welcome Back</h1>
+          <h1 className="text-foreground mb-2 text-3xl font-medium">
+            Welcome Back
+          </h1>
         </div>
 
         <form
           noValidate
           onSubmit={(e) => {
-            e.preventDefault()
-            form.handleSubmit()
+            e.preventDefault();
+            form.handleSubmit();
           }}
         >
           <FieldGroup>
             <form.Field name="email">
               {(field) => {
-                const isInvalid = field.state.meta.errors.length > 0
+                const isInvalid = field.state.meta.errors.length > 0;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -77,17 +84,19 @@ function Login() {
                     />
                     {isInvalid && (
                       <FieldError
-                        errors={field.state.meta.errors as Array<{ message?: string }>}
+                        errors={
+                          field.state.meta.errors as Array<{ message?: string }>
+                        }
                       />
                     )}
                   </Field>
-                )
+                );
               }}
             </form.Field>
 
             <form.Field name="password">
               {(field) => {
-                const isInvalid = field.state.meta.errors.length > 0
+                const isInvalid = field.state.meta.errors.length > 0;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -104,28 +113,40 @@ function Login() {
                     />
                     {isInvalid && (
                       <FieldError
-                        errors={field.state.meta.errors as Array<{ message?: string }>}
+                        errors={
+                          field.state.meta.errors as Array<{ message?: string }>
+                        }
                       />
                     )}
                   </Field>
-                )
+                );
               }}
             </form.Field>
           </FieldGroup>
 
-          <div className="mb-8 mt-2 flex justify-end">
-            <Button type="button" variant="ghost" size="sm" className="text-primary">
-              Forgot password?
+          <div className="mt-2 mb-8 flex justify-end">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="text-primary"
+            >
+              <Link to="/auth/forgot-password">Forgot password?</Link>
             </Button>
           </div>
 
           {serverError && (
-            <p role="alert" className="mb-4 text-sm text-destructive">
+            <p role="alert" className="text-destructive mb-4 text-sm">
               {serverError}
             </p>
           )}
 
-          <Button type="submit" variant="primary" className="w-full" disabled={form.state.isSubmitting}>
+          <Button
+            type="submit"
+            variant="primary"
+            className="w-full"
+            disabled={form.state.isSubmitting}
+          >
             Sign in
           </Button>
           <Button
@@ -146,7 +167,7 @@ function Login() {
         }}
       />
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
