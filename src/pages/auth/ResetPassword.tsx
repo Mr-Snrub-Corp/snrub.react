@@ -45,7 +45,7 @@ function ResetPassword() {
     onSubmit: async ({ value }) => {
       setServerError("");
       try {
-        await authApi.resetPassword({ token, password: value.password });
+        await authApi.resetPassword({ token, new_password: value.password });
         toast.success("Password has been reset", {
           description: "Redirecting to login...",
           position: "top-right",

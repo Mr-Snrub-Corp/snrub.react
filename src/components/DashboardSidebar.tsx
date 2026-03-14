@@ -1,5 +1,5 @@
-import { NavLink } from "react-router";
-import { HomeIcon, TriangleAlertIcon, UsersIcon } from "lucide-react";
+import { NavLink, useNavigate } from "react-router";
+import { HomeIcon, LogOutIcon, TriangleAlertIcon, UsersIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -11,6 +11,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useAuthStore } from "@/stores/auth";
+import { useUsersStore } from "@/stores/users";
 
 const navItems = [
   { to: "/dashboard", label: "Home", icon: HomeIcon },
@@ -19,6 +21,16 @@ const navItems = [
 ];
 
 export function DashboardSidebar() {
+  const clearAuth = useAuthStore((s) => s.clearAuth);
+  const resetUsers = useUsersStore((s) => s.reset);
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    clearAuth();
+    resetUsers();
+    navigate("/auth/login");
+  }
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -50,7 +62,16 @@ export function DashboardSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton onClick={handleLogout}>
+              <LogOutIcon />
+              <span>Logout</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }

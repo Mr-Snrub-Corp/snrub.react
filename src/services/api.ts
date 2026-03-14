@@ -57,7 +57,7 @@ const authApi = {
     apiClient.get('auth/google/login').then((res) => res.data),
   requestPasswordReset: (data: { email: string }) =>
     apiClient.post('auth/request-password-reset', data).then((res) => res.data),
-  resetPassword: (data: { token: string; password: string }) =>
+  resetPassword: (data: { token: string; new_password: string }) =>
     apiClient.post('auth/reset-password', data).then((res) => res.data),
 }
 

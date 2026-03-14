@@ -8,6 +8,7 @@ interface UsersState {
   users: User[] | null;
   setUsers: (users: User[]) => void;
   fetchUsers: () => Promise<void>;
+  reset: () => void;
 }
 
 export const useUsersStore = create<UsersState>()(
@@ -15,6 +16,7 @@ export const useUsersStore = create<UsersState>()(
     (set) => ({
       users: null,
       setUsers: (users: User[]) => set({ users }),
+      reset: () => set({ users: null }),
       fetchUsers: async () => {
         try {
           const users = await usersApi.get();

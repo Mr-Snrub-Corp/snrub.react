@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router";
 import "./index.css";
 import AuthLayout from "./layouts/AuthLayout.tsx";
 import DashboardLayout from "./layouts/DashboardLayout.tsx";
@@ -12,6 +12,15 @@ import ResetPassword from "./pages/auth/ResetPassword.tsx";
 import DashboardHome from "./pages/dashboard/DashboardHome.tsx";
 import Team from "./pages/dashboard/Team.tsx";
 import Incidents from "./pages/dashboard/Incidents.tsx";
+import { useAuthStore } from "@/stores/auth";
+
+async function requireAuth() {
+  // Cant use hooks  (loaders are plain functions)
+  const { token } = useAuthStore.getState();
+  if (!token) {
+    return redirect("auth/login");
+  }
+}
 
 const router = createBrowserRouter([
   {
@@ -25,6 +34,7 @@ const router = createBrowserRouter([
   },
   {
     element: <DashboardLayout />,
+    loader: requireAuth,
     children: [
       { path: "/dashboard", element: <DashboardHome /> },
       { path: "/dashboard/team", element: <Team /> },
