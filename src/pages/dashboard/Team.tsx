@@ -19,19 +19,19 @@ import {
 import { MoreHorizontalIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAvatarFallback, getAvatarSrc } from "@/utils/user";
-import { useAuthStore, selectIsAdmin, selectIsSuperAdmin } from "@/stores/auth";
+import { useAuthStore, selectIsSuperAdmin } from "@/stores/auth";
 
 function Team() {
   const fetchUsers = useUsersStore((s) => s.fetchUsers);
   const users = useUsersStore((s) => s.users);
 
-  const isAdmin = useAuthStore(selectIsAdmin);
   const isSuperAdmin = useAuthStore(selectIsSuperAdmin);
 
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
 
+  // Debug logger to be removed
   useEffect(() => {
     console.log("users", users);
   }, [users]);

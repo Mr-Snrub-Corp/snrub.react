@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { useAuthStore } from '../stores/auth'
 import type { AuthResponse } from '../types/auth'
+import type { IncidentReport } from '../types/incidentReport'
+import type { IncidentType } from '../types/incidentType'
 import type { User } from '../types/user'
 
 const apiClient = axios.create({
@@ -43,8 +45,8 @@ const usersApi = {
     apiClient.delete<User>(`users/${uid}/photo`).then((res) => res.data),
 }
 
-const incidentTypesApi = createCrudApi('incident-types')
-const incidentReportsApi = createCrudApi('incident-reports')
+const incidentTypesApi = createCrudApi<IncidentType>('incident-types')
+const incidentReportsApi = createCrudApi<IncidentReport>('incident-reports')
 
 const authApi = {
   login: (data: { email: string; password: string }) =>
