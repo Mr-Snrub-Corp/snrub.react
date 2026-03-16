@@ -1,5 +1,10 @@
 import { NavLink, useNavigate } from "react-router";
-import { HomeIcon, LogOutIcon, TriangleAlertIcon, UsersIcon } from "lucide-react";
+import {
+  HomeIcon,
+  LogOutIcon,
+  TriangleAlertIcon,
+  UsersIcon,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -33,8 +38,8 @@ export function DashboardSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader>
-        <div className="flex items-center justify-center gap-2">
+      <SidebarHeader className="p-0">
+        <div className="bg-primary-600 flex items-center justify-center py-3">
           <div className="flex size-10 items-center justify-center rounded-full border-2 border-black bg-yellow-400 text-xl font-bold">
             <img
               src="/img/nuclear-symbol.png"

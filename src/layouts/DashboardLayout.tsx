@@ -10,7 +10,7 @@ export default function DashboardLayout() {
       <DashboardSidebar />
       <div className="flex flex-1 flex-col">
         <DashboardNavbar />
-        <main className="flex-1 p-8">
+        <main className="flex-1">
           <Outlet />
           <Toaster />
         </main>
