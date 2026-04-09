@@ -16,7 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Eye, MoreHorizontalIcon } from "lucide-react";
+import { Eye, MoreVerticalIcon, Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAvatarFallback, getAvatarSrc } from "@/utils/user";
 import { useAuthStore, selectIsSuperAdmin } from "@/stores/auth";
@@ -66,24 +66,48 @@ function Team() {
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell className="text-right">
+                  {/* Inline buttons: xl+ */}
+                  <div className="hidden justify-end gap-1 xl:flex">
+                    {isSuperAdmin && (
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        data-testid="delete-user-btn"
+                      >
+                        <Trash2 />
+                        <span className="sr-only">Delete</span>
+                      </Button>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      data-testid="view-user-btn"
+                      onClick={() => navigate(`/dashboard/team/${user.uid}`)}
+                    >
+                      <Eye />
+                      <span className="sr-only">View</span>
+                    </Button>
+                  </div>
+
+                  {/* Dropdown menu: below xl */}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="size-8">
-                        <MoreHorizontalIcon />
+                      <Button
+                        variant="ghost"
+                        size="icon-sm"
+                        className="xl:hidden"
+                      >
+                        <MoreVerticalIcon />
                         <span className="sr-only">Open menu</span>
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem
                         data-testid="view-user-btn"
-                        onClick={() =>
-                          navigate(`/dashboard/team/${user.uid}`)
-                        }
+                        onClick={() => navigate(`/dashboard/team/${user.uid}`)}
                       >
-                        <Eye />
                         View
                       </DropdownMenuItem>
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
                       {isSuperAdmin && (
                         <>
                           <DropdownMenuSeparator />
