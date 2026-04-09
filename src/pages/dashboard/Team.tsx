@@ -16,15 +16,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontalIcon } from "lucide-react";
+import { Eye, MoreHorizontalIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAvatarFallback, getAvatarSrc } from "@/utils/user";
 import { useAuthStore, selectIsSuperAdmin } from "@/stores/auth";
+import { useNavigate } from "react-router";
 
 function Team() {
   const fetchUsers = useUsersStore((s) => s.fetchUsers);
   const users = useUsersStore((s) => s.users);
 
+  const navigate = useNavigate();
   const isSuperAdmin = useAuthStore(selectIsSuperAdmin);
 
   useEffect(() => {
@@ -72,6 +74,15 @@ function Team() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
+                      <DropdownMenuItem
+                        data-testid="view-user-btn"
+                        onClick={() =>
+                          navigate(`/dashboard/team/${user.uid}`)
+                        }
+                      >
+                        <Eye />
+                        View
+                      </DropdownMenuItem>
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                       {isSuperAdmin && (
                         <>

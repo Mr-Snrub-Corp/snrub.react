@@ -11,6 +11,7 @@ import ResetPassword from "./pages/auth/ResetPassword.tsx";
 
 import DashboardHome from "./pages/dashboard/DashboardHome.tsx";
 import Team from "./pages/dashboard/Team.tsx";
+import UserDetail from "./pages/dashboard/UserDetail.tsx";
 import Incidents from "./pages/dashboard/Incidents.tsx";
 import { useAuthStore } from "@/stores/auth";
 
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/dashboard", element: <DashboardHome /> },
       { path: "/dashboard/team", element: <Team /> },
+      { path: "/dashboard/team/:uid", element: <UserDetail /> },
       { path: "/dashboard/incidents", element: <Incidents /> },
     ],
   },
