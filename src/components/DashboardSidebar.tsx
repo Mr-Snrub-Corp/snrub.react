@@ -21,7 +21,7 @@ import { useUsersStore } from "@/stores/users";
 
 const navItems = [
   { to: "/dashboard", label: "Home", icon: HomeIcon },
-  { to: "/dashboard/team", label: "Team", icon: UsersIcon },
+  { to: "/dashboard/employees", label: "Employees", icon: UsersIcon },
   { to: "/dashboard/incidents", label: "Incidents", icon: TriangleAlertIcon },
 ];
 

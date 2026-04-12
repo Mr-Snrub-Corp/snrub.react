@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, Pencil } from "lucide-react";
 
-function UserDetail() {
+function EmployeeDetail() {
   const { uid } = useParams<{ uid: string }>();
   const navigate = useNavigate();
   const isAdmin = useAuthStore(selectIsAdmin);
@@ -35,12 +35,12 @@ function UserDetail() {
     if (window.history.state?.idx > 0) {
       navigate(-1);
     } else {
-      navigate("/dashboard/team");
+      navigate("/dashboard/employees");
     }
   }
 
   if (isLoading) {
-    return <UserDetailSkeleton />;
+    return <EmployeeDetailSkeleton />;
   }
 
   if (!user) {
@@ -70,7 +70,7 @@ function UserDetail() {
           <Button
             variant="primary"
             data-testid="edit-user-btn"
-            onClick={() => navigate(`/dashboard/team/${uid}/edit`)}
+            onClick={() => navigate(`/dashboard/employees/${uid}/edit`)}
           >
             <Pencil />
             Edit
@@ -145,7 +145,7 @@ function UserDetail() {
   );
 }
 
-function UserDetailSkeleton() {
+function EmployeeDetailSkeleton() {
   return (
     <div className="bg-grey-50 dark:bg-grey-950 px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8">
       <div className="mb-4 flex items-center justify-between xl:w-3/4">
@@ -169,4 +169,4 @@ function UserDetailSkeleton() {
   );
 }
 
-export default UserDetail;
+export default EmployeeDetail;

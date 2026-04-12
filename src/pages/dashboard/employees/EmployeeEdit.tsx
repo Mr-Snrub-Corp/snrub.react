@@ -1,22 +1,9 @@
-import { useForm } from "@tanstack/react-form";
-import { useEffect, useState } from "react";
-import { z } from "zod";
+import { useEffect } from "react";
 
-function UserEdit() {
+function EmployeeEdit() {
   useEffect(() => {
     document.title = "Snrub Corp | Edit Team Member";
   }, []);
-
-  const [serverError, setServerError] = useState("");
-
-  const userSchema = z.object({
-    email: z.email({ error: "Please enter a valid email address" }),
-    name: z.string().min(2, { error: "Please enter a the employees name" }),
-  });
-
-  const form = useForm({
-    defaultValues: { email: "", name: "" },
-  });
 
   return (
     <div className="bg-grey-50 dark:bg-grey-950 h-screen px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8">
@@ -34,7 +21,7 @@ function UserEdit() {
   );
 }
 
-export default UserEdit;
+export default EmployeeEdit;
 
 // email: "",
 // name: "",

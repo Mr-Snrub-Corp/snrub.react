@@ -1,4 +1,5 @@
-import { USER_STATUS, type User, type UserStatus } from "@/types/user";
+import { USER_STATUS } from "@/constants/user";
+import { type User, type UserStatus } from "@/types/user";
 
 export function getAvatarSrc(user: User | null) {
   return user?.photo ? `data:image/png;base64,${user.photo}` : undefined;

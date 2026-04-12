@@ -10,10 +10,10 @@ import ForgotPassword from "./pages/auth/ForgotPassword.tsx";
 import ResetPassword from "./pages/auth/ResetPassword.tsx";
 
 import DashboardHome from "./pages/dashboard/DashboardHome.tsx";
-import Team from "./pages/dashboard/team/Team.tsx";
-import UserDetail from "./pages/dashboard/team/UserDetail.tsx";
-import UserEdit from "./pages/dashboard/team/UserEdit.tsx";
-import UserNew from "./pages/dashboard/team/UserNew.tsx";
+import Employees from "./pages/dashboard/employees/Employees.tsx";
+import EmployeeDetail from "./pages/dashboard/employees/EmployeeDetail.tsx";
+import EmployeeEdit from "./pages/dashboard/employees/EmployeeEdit.tsx";
+import EmployeeNew from "./pages/dashboard/employees/EmployeeNew.tsx";
 import Incidents from "./pages/dashboard/Incidents.tsx";
 import { useAuthStore } from "@/stores/auth";
 
@@ -40,10 +40,10 @@ const router = createBrowserRouter([
     loader: requireAuth,
     children: [
       { path: "/dashboard", element: <DashboardHome /> },
-      { path: "/dashboard/team", element: <Team /> },
-      { path: "/dashboard/team/new", element: <UserNew /> },
-      { path: "/dashboard/team/:uid", element: <UserDetail /> },
-      { path: "/dashboard/team/:uid/edit", element: <UserEdit /> },
+      { path: "/dashboard/employees", element: <Employees /> },
+      { path: "/dashboard/employees/new", element: <EmployeeNew /> },
+      { path: "/dashboard/employees/:uid", element: <EmployeeDetail /> },
+      { path: "/dashboard/employees/:uid/edit", element: <EmployeeEdit /> },
       { path: "/dashboard/incidents", element: <Incidents /> },
     ],
   },

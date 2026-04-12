@@ -40,8 +40,8 @@ describe('DashboardNavbar', () => {
     })
 
     it('shows capitalised segment label for nested routes', () => {
-      renderNavbar('/dashboard/team')
-      expect(screen.getByText('Team')).toBeInTheDocument()
+      renderNavbar('/dashboard/employees')
+      expect(screen.getByText('Employees')).toBeInTheDocument()
     })
 
     it('links home icon when on a nested route', () => {

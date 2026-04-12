@@ -25,7 +25,7 @@ function Login() {
   }, []);
 
   const [serverError, setServerError] = useState("");
-  const login = useAuthStore((s) => s.login);
+  const login = useAuthStore((state) => state.login);
   let navigate = useNavigate();
 
   const form = useForm({

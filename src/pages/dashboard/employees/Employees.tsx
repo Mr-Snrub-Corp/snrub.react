@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUsersStore } from "@/stores/users";
+import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -22,9 +23,12 @@ import { getAvatarFallback, getAvatarSrc } from "@/utils/user";
 import { useAuthStore, selectIsSuperAdmin } from "@/stores/auth";
 import { useNavigate } from "react-router";
 
-function Team() {
+function Employees() {
   const fetchUsers = useUsersStore((s) => s.fetchUsers);
+  const deleteUser = useUsersStore((s) => s.deleteUser);
   const users = useUsersStore((s) => s.users);
+
+  const [pendingDeleteUid, setPendingDeleteUid] = useState<string | null>(null);
 
   const navigate = useNavigate();
   const isSuperAdmin = useAuthStore(selectIsSuperAdmin);
@@ -42,7 +46,14 @@ function Team() {
     <div className="bg-grey-50 dark:bg-grey-950 px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8">
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-3xl font-medium">Team</h1>
-        {isSuperAdmin && <Button variant="primary">Add User</Button>}
+        {isSuperAdmin && (
+          <Button
+            variant="primary"
+            onClick={() => navigate(`/dashboard/employees/new`)}
+          >
+            Add User
+          </Button>
+        )}
       </div>
       <Table>
         <TableHeader>
@@ -73,6 +84,7 @@ function Team() {
                         variant="ghost"
                         size="icon-sm"
                         data-testid="delete-user-btn"
+                        onClick={() => setPendingDeleteUid(user.uid)}
                       >
                         <Trash2 />
                         <span className="sr-only">Delete</span>
@@ -82,7 +94,7 @@ function Team() {
                       variant="ghost"
                       size="icon-sm"
                       data-testid="view-user-btn"
-                      onClick={() => navigate(`/dashboard/team/${user.uid}`)}
+                      onClick={() => navigate(`/dashboard/employees/${user.uid}`)}
                     >
                       <Eye />
                       <span className="sr-only">View</span>
@@ -104,14 +116,18 @@ function Team() {
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem
                         data-testid="view-user-btn"
-                        onClick={() => navigate(`/dashboard/team/${user.uid}`)}
+                        onClick={() => navigate(`/dashboard/employees/${user.uid}`)}
                       >
                         View
                       </DropdownMenuItem>
                       {isSuperAdmin && (
                         <>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem variant="destructive">
+                          <DropdownMenuItem
+                            variant="destructive"
+                            data-testid="delete-user-btn"
+                            onClick={() => setPendingDeleteUid(user.uid)}
+                          >
                             Delete
                           </DropdownMenuItem>
                         </>
@@ -124,8 +140,18 @@ function Team() {
           })}
         </TableBody>
       </Table>
+      <DeleteConfirmDialog
+        open={pendingDeleteUid !== null}
+        header="Delete User"
+        confirmButtonLabel="Delete"
+        onClose={() => setPendingDeleteUid(null)}
+        onConfirm={() => {
+          if (pendingDeleteUid) deleteUser(pendingDeleteUid);
+          setPendingDeleteUid(null);
+        }}
+      />
     </div>
   );
 }
 
-export default Team;
+export default Employees;
