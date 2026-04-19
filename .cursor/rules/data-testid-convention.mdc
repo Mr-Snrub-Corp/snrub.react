@@ -1,0 +1,152 @@
+---
+description: data-testid naming convention for all interactive elements
+globs: ["src/**/*.vue", "src/**/*.tsx", "src/**/*.jsx", "e2e/**/*.ts"]
+alwaysApply: true
+---
+
+# data-testid Convention
+
+## Pattern
+
+```
+data-testid="domain.component.element-type"
+```
+
+All three segments are **required**. Use kebab-case within each segment. Separate segments with `.`.
+
+| Segment | Description | Examples |
+|---|---|---|
+| `domain` | Feature area or route domain | `auth`, `nav`, `employees`, `incidents`, `reporting` |
+| `component` | The specific component or form within that domain | `login-form`, `sidebar`, `list`, `detail`, `edit-form` |
+| `element-type` | What the element is and/or does | `email-input`, `submit-btn`, `table`, `error-message`, `back-btn` |
+
+## Rules
+
+- **Stable**: never derived from dynamic content (no IDs, indices, user-generated strings)
+- **Unique**: the full three-part string must be unique within the domain
+- **Consistent element suffixes**: use `‑btn` for buttons, `‑input` for text/number/date inputs, `‑select` for dropdowns, `‑table` for tables, `‑link` for navigation anchors/router-links, `‑message` for inline feedback, `‑dialog` for modals
+- **Framework-agnostic**: the same convention applies to Vue, React, and Angular repos; copy this rule verbatim
+
+## Examples
+
+```html
+<!-- Auth -->
+<input data-testid="auth.login-form.email-input" />
+<button data-testid="auth.login-form.sign-in-btn" />
+<span data-testid="auth.login-form.error-message" />
+<button data-testid="auth.forgot-password-form.submit-btn" />
+
+<!-- Navigation -->
+<a data-testid="nav.sidebar.home-link" />
+<a data-testid="nav.sidebar.logout-btn" />
+
+<!-- Employees feature -->
+<button data-testid="employees.list.add-btn" />
+<table data-testid="employees.list.table" />
+<button data-testid="employees.list.delete-btn" />
+<button data-testid="employees.detail.edit-btn" />
+<span data-testid="employees.detail.name" />
+<button data-testid="employees.edit-form.cancel-btn" />
+```
+
+## In Page Object Models (Playwright)
+
+Reference test IDs using the full dot-notation string:
+
+```ts
+this.emailInput = page.getByTestId('auth.login-form.email-input')
+this.submitButton = page.getByTestId('auth.login-form.sign-in-btn')
+```
+
+## Do Not
+
+- Use the old flat kebab-case format: ~~`data-testid="email-input"`~~
+- Embed dynamic values: ~~`data-testid="`employee-${uid}`"`~~
+- Omit any of the three segments: ~~`data-testid="login.email-input"`~~
+- Use underscores or camelCase: ~~`data-testid="auth.loginForm.emailInput"`~~
+
+---
+
+## Registered Test IDs (by view)
+
+Keep this section up to date whenever a new `data-testid` is added or removed.
+
+### Navigation — `src/components/DashboardSidebar.tsx`
+
+| Test ID | Element | Status |
+|---|---|---|
+| `nav.sidebar.home-link` | Home nav link | ✅ implemented |
+| `nav.sidebar.employees-link` | Employees nav link | ✅ implemented |
+| `nav.sidebar.incidents-link` | Incidents nav link | ✅ implemented |
+| `nav.sidebar.design-link` | Design nav link | ⏳ route not yet implemented |
+| `nav.sidebar.reporting-link` | Reporting nav link | ⏳ route not yet implemented |
+| `nav.sidebar.reactor-monitoring-link` | Reactor Monitoring nav link | ⏳ route not yet implemented |
+| `nav.sidebar.logout-btn` | Logout button | ✅ implemented |
+
+### Auth — `src/pages/auth/Login.tsx`
+
+| Test ID | Element | Status |
+|---|---|---|
+| `auth.login-form.email-input` | Email input | ✅ implemented |
+| `auth.login-form.password-input` | Password input | ✅ implemented |
+| `auth.login-form.forgot-password-btn` | Forgot password link-button | ✅ implemented |
+| `auth.login-form.sign-in-btn` | Sign in submit button | ✅ implemented |
+| `auth.login-form.error-message` | Inline error message | ✅ implemented |
+
+### Auth — `src/pages/auth/ForgotPassword.tsx`
+
+| Test ID | Element | Status |
+|---|---|---|
+| `auth.forgot-password-form.email-input` | Email input | ✅ implemented |
+| `auth.forgot-password-form.back-to-login-btn` | Back to login button | ✅ implemented |
+| `auth.forgot-password-form.submit-btn` | Submit button | ✅ implemented |
+
+### Employees — `src/pages/dashboard/employees/Employees.tsx`
+
+| Test ID | Element | Status |
+|---|---|---|
+| `employees.list.add-btn` | Add employee button | ✅ implemented |
+| `employees.list.table` | Employees data table | ✅ implemented |
+| `employees.list.delete-btn` | Per-row delete button | ✅ implemented |
+| `employees.list.view-btn` | Per-row view/detail button | ✅ implemented |
+
+### Employees — `src/pages/dashboard/employees/EmployeeDetail.tsx`
+
+| Test ID | Element | Status |
+|---|---|---|
+| `employees.detail.edit-btn` | Edit button | ✅ implemented |
+| `employees.detail.name` | Employee name display | ✅ implemented |
+| `employees.detail.email` | Employee email display | ✅ implemented |
+| `employees.detail.role` | Employee role tag | ✅ implemented |
+| `employees.detail.status` | Employee status tag | ✅ implemented |
+| `employees.detail.back-btn` | Back button | ✅ implemented |
+
+### Employees — `src/pages/dashboard/employees/EmployeeNew.tsx`
+
+| Test ID | Element | Status |
+|---|---|---|
+| `employees.new-form.email-input` | Email input | ✅ implemented |
+| `employees.new-form.name-input` | Name input | ✅ implemented |
+| `employees.new-form.role-select` | Role dropdown | ✅ implemented |
+| `employees.new-form.status-select` | Status dropdown | ✅ implemented |
+| `employees.new-form.password-input` | Password input | ✅ implemented |
+| `employees.new-form.create-btn` | Create employee submit button | ✅ implemented |
+| `employees.new-form.cancel-btn` | Cancel button | ✅ implemented |
+
+### Employees — `src/pages/dashboard/employees/EmployeeEdit.tsx`
+
+| Test ID | Element | Status |
+|---|---|---|
+| `employees.edit-form.email-input` | Email input | ⏳ form not yet implemented |
+| `employees.edit-form.name-input` | Name input | ⏳ form not yet implemented |
+| `employees.edit-form.role-select` | Role dropdown | ⏳ form not yet implemented |
+| `employees.edit-form.status-select` | Status dropdown | ⏳ form not yet implemented |
+| `employees.edit-form.update-btn` | Update/save button | ⏳ form not yet implemented |
+| `employees.edit-form.cancel-btn` | Cancel button | ⏳ form not yet implemented |
+
+### Incidents — `src/pages/dashboard/incidents/IncidentTypes.tsx` _(route not yet implemented)_
+
+| Test ID | Element | Status |
+|---|---|---|
+| `incidents.types.category-group` | Category group container | ⏳ route not yet implemented |
+| `incidents.types.table` | Incident types data table | ⏳ route not yet implemented |

@@ -50,7 +50,7 @@ function EmployeeDetail() {
         <Button
           variant="outline"
           className="mt-4"
-          data-testid="back-btn"
+          data-testid="employees.detail.back-btn"
           onClick={handleGoBack}
         >
           <ArrowLeft />
@@ -69,7 +69,7 @@ function EmployeeDetail() {
         {isAdmin && (
           <Button
             variant="primary"
-            data-testid="edit-user-btn"
+            data-testid="employees.detail.edit-btn"
             onClick={() => navigate(`/dashboard/employees/${uid}/edit`)}
           >
             <Pencil />
@@ -98,7 +98,7 @@ function EmployeeDetail() {
               </div>
               <div
                 className="text-grey-900 dark:text-grey-50"
-                data-testid="user-detail-name"
+                data-testid="employees.detail.name"
               >
                 {user.name}
               </div>
@@ -109,7 +109,7 @@ function EmployeeDetail() {
               </div>
               <div
                 className="text-grey-900 dark:text-grey-50"
-                data-testid="user-detail-email"
+                data-testid="employees.detail.email"
               >
                 {user.email}
               </div>
@@ -118,7 +118,7 @@ function EmployeeDetail() {
               <div className="text-grey-500 dark:text-grey-400 mb-1 text-sm">
                 Role
               </div>
-              <Badge variant="outline" data-testid="user-detail-role">
+              <Badge variant="outline" data-testid="employees.detail.role">
                 {formatLabel(user.role)}
               </Badge>
             </div>
@@ -128,7 +128,7 @@ function EmployeeDetail() {
               </div>
               <Badge
                 variant={getStatusVariant(user.status)}
-                data-testid="user-detail-status"
+                data-testid="employees.detail.status"
               >
                 {formatLabel(user.status)}
               </Badge>
@@ -137,7 +137,7 @@ function EmployeeDetail() {
         </div>
       </div>
 
-      <Button variant="outline" data-testid="back-btn" onClick={handleGoBack}>
+      <Button variant="outline" data-testid="employees.detail.back-btn" onClick={handleGoBack}>
         <ArrowLeft />
         Back
       </Button>

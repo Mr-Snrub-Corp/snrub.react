@@ -11,6 +11,7 @@ import { useForm } from "@tanstack/react-form";
 import { useState } from "react";
 import { authApi } from "@/services/api";
 import { toast } from "sonner";
+import { Link } from "react-router";
 
 const forgotPasswordSchema = z.object({
   email: z.email({ error: "Please enter a valid email address" }),
@@ -91,6 +92,7 @@ function ForgotPassword() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                         aria-invalid={isInvalid}
+                        data-testid="auth.forgot-password-form.email-input"
                       />
                       {isInvalid && (
                         <FieldError
@@ -113,14 +115,26 @@ function ForgotPassword() {
               </p>
             )}
 
-            <Button
-              type="submit"
-              variant="primary"
-              className="mt-4 w-full"
-              disabled={form.state.isSubmitting}
-            >
-              Sign in
-            </Button>
+            <div className="mt-4 flex flex-col gap-3">
+              <Button
+                type="submit"
+                variant="primary"
+                className="w-full"
+                disabled={form.state.isSubmitting}
+                data-testid="auth.forgot-password-form.submit-btn"
+              >
+                Send Reset Instructions
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full"
+                asChild
+                data-testid="auth.forgot-password-form.back-to-login-btn"
+              >
+                <Link to="/auth/login">Back to login</Link>
+              </Button>
+            </div>
           </form>
           {/* <label
             for="email2"

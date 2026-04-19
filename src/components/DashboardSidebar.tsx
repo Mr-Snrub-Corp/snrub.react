@@ -20,9 +20,9 @@ import { useAuthStore } from "@/stores/auth";
 import { useUsersStore } from "@/stores/users";
 
 const navItems = [
-  { to: "/dashboard", label: "Home", icon: HomeIcon },
-  { to: "/dashboard/employees", label: "Employees", icon: UsersIcon },
-  { to: "/dashboard/incidents", label: "Incidents", icon: TriangleAlertIcon },
+  { to: "/dashboard", label: "Home", icon: HomeIcon, testId: "nav.sidebar.home-link" },
+  { to: "/dashboard/employees", label: "Employees", icon: UsersIcon, testId: "nav.sidebar.employees-link" },
+  { to: "/dashboard/incidents", label: "Incidents", icon: TriangleAlertIcon, testId: "nav.sidebar.incidents-link" },
 ];
 
 export function DashboardSidebar() {
@@ -53,10 +53,10 @@ export function DashboardSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map(({ to, label, icon: Icon }) => (
+              {navItems.map(({ to, label, icon: Icon, testId }) => (
                 <SidebarMenuItem key={to}>
                   <SidebarMenuButton asChild>
-                    <NavLink to={to} end>
+                    <NavLink to={to} end data-testid={testId}>
                       <Icon />
                       <span>{label}</span>
                     </NavLink>
@@ -70,7 +70,7 @@ export function DashboardSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={handleLogout}>
+            <SidebarMenuButton data-testid="nav.sidebar.logout-btn" onClick={handleLogout}>
               <LogOutIcon />
               <span>Logout</span>
             </SidebarMenuButton>

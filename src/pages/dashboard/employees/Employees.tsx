@@ -49,13 +49,14 @@ function Employees() {
         {isSuperAdmin && (
           <Button
             variant="primary"
+            data-testid="employees.list.add-btn"
             onClick={() => navigate(`/dashboard/employees/new`)}
           >
             Add User
           </Button>
         )}
       </div>
-      <Table>
+      <Table data-testid="employees.list.table">
         <TableHeader>
           <TableRow>
             <TableHead>Photo</TableHead>
@@ -83,7 +84,7 @@ function Employees() {
                       <Button
                         variant="ghost"
                         size="icon-sm"
-                        data-testid="delete-user-btn"
+                        data-testid="employees.list.delete-btn"
                         onClick={() => setPendingDeleteUid(user.uid)}
                       >
                         <Trash2 />
@@ -93,7 +94,7 @@ function Employees() {
                     <Button
                       variant="ghost"
                       size="icon-sm"
-                      data-testid="view-user-btn"
+                      data-testid="employees.list.view-btn"
                       onClick={() => navigate(`/dashboard/employees/${user.uid}`)}
                     >
                       <Eye />
@@ -115,7 +116,7 @@ function Employees() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem
-                        data-testid="view-user-btn"
+                        data-testid="employees.list.view-btn"
                         onClick={() => navigate(`/dashboard/employees/${user.uid}`)}
                       >
                         View
@@ -125,7 +126,7 @@ function Employees() {
                           <DropdownMenuSeparator />
                           <DropdownMenuItem
                             variant="destructive"
-                            data-testid="delete-user-btn"
+                            data-testid="employees.list.delete-btn"
                             onClick={() => setPendingDeleteUid(user.uid)}
                           >
                             Delete

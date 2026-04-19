@@ -113,6 +113,7 @@ function EmployeeNew() {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
+                      data-testid="employees.new-form.email-input"
                     />
                     {isInvalid && (
                       <FieldError
@@ -140,6 +141,7 @@ function EmployeeNew() {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
+                      data-testid="employees.new-form.name-input"
                     />
                     {isInvalid && (
                       <FieldError
@@ -159,7 +161,7 @@ function EmployeeNew() {
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Role</FieldLabel>
                     <Select defaultValue={USER_ROLES.VIEWER}>
-                      <SelectTrigger id="checkout-exp-month-ts6">
+                      <SelectTrigger id="checkout-exp-month-ts6" data-testid="employees.new-form.role-select">
                         <SelectValue placeholder="Select a role" />
                       </SelectTrigger>
                       <SelectContent>
@@ -185,7 +187,7 @@ function EmployeeNew() {
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Status</FieldLabel>
                     <Select defaultValue={USER_STATUS.ACTIVE}>
-                      <SelectTrigger id="checkout-exp-month-ts6">
+                      <SelectTrigger id="checkout-exp-month-ts6" data-testid="employees.new-form.status-select">
                         <SelectValue placeholder="Select a role" />
                       </SelectTrigger>
                       <SelectContent>
@@ -219,6 +221,7 @@ function EmployeeNew() {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
+                      data-testid="employees.new-form.password-input"
                     />
                     {isInvalid && (
                       <FieldError
@@ -238,14 +241,26 @@ function EmployeeNew() {
             </p>
           )}
 
-          <Button
-            type="submit"
-            variant="primary"
-            className="w-full"
-            disabled={form.state.isSubmitting}
-          >
-            Create User
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              type="submit"
+              variant="primary"
+              className="flex-1"
+              disabled={form.state.isSubmitting}
+              data-testid="employees.new-form.create-btn"
+            >
+              Create User
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              className="flex-1"
+              onClick={() => navigate("/dashboard/employees")}
+              data-testid="employees.new-form.cancel-btn"
+            >
+              Cancel
+            </Button>
+          </div>
         </div>
       </form>
     </div>
