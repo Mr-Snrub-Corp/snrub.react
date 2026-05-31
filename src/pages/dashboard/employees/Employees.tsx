@@ -69,7 +69,7 @@ function Employees() {
         <TableBody>
           {users?.map((user) => {
             return (
-              <TableRow>
+              <TableRow key={user.uid}>
                 <TableCell className="">
                   <Avatar className="border-grey-300 mr-2 border">
                     <AvatarImage src={getAvatarSrc(user)} alt={user?.name} />

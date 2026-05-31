@@ -142,12 +142,12 @@ Keep this section up to date whenever a new `data-testid` is added or removed.
 
 | Test ID | Element | Status |
 |---|---|---|
-| `employees.edit-form.email-input` | Email input | ⏳ form not yet implemented |
-| `employees.edit-form.name-input` | Name input | ⏳ form not yet implemented |
-| `employees.edit-form.role-select` | Role dropdown | ⏳ form not yet implemented |
-| `employees.edit-form.status-select` | Status dropdown | ⏳ form not yet implemented |
-| `employees.edit-form.update-btn` | Update/save button | ⏳ form not yet implemented |
-| `employees.edit-form.cancel-btn` | Cancel button | ⏳ form not yet implemented |
+| `employees.edit-form.email-input` | Email input | ✅ implemented |
+| `employees.edit-form.name-input` | Name input | ✅ implemented |
+| `employees.edit-form.role-select` | Role dropdown | ✅ implemented |
+| `employees.edit-form.status-select` | Status dropdown | ✅ implemented |
+| `employees.edit-form.update-btn` | Update/save button | ✅ implemented |
+| `employees.edit-form.cancel-btn` | Cancel button | ✅ implemented |
 
 ### Incidents — `src/pages/dashboard/incidents/IncidentTypes.tsx` _(route not yet implemented)_
 
