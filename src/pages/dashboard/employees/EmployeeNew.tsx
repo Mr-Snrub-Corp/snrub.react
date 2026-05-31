@@ -1,5 +1,5 @@
 import { USER_ROLES, USER_STATUS } from "@/constants/user";
-import { useForm } from "@tanstack/react-form";
+import { useForm, useStore } from "@tanstack/react-form";
 import { useState } from "react";
 import { useUsersStore } from "@/stores/users";
 import type { UserRole, UserStatus } from "@/types/user";
@@ -41,7 +41,7 @@ function EmployeeNew() {
 
   const userSchema = z.object({
     email: z.email({ error: "Please enter a valid email address" }),
-    name: z.string().min(2, { error: "Please enter a name" }),
+    name: z.string().min(1, { error: "Name is required" }),
     password: z
       .string()
       .min(8, { error: "Password must be at least 8 characters" })
@@ -78,11 +78,16 @@ function EmployeeNew() {
     },
   });
 
+  const canCreate = useStore(
+    form.baseStore,
+    (s) => !!s.values.email && !!s.values.name && !!s.values.password && !s.isSubmitting,
+  );
+
   return (
     <div className="bg-grey-50 dark:bg-grey-950 h-screen px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8">
       <div className="mb-4 flex items-center justify-between xl:w-3/4">
         <h1 className="text-grey-900 dark:text-grey-50 text-3xl font-bold">
-          Add Team Member
+          Add New Employee
         </h1>
       </div>
       <form
@@ -98,7 +103,12 @@ function EmployeeNew() {
           </div>
 
           <FieldGroup>
-            <form.Field name="email">
+            <form.Field
+              name="email"
+              validators={{
+                onBlur: z.string().email({ error: "Please enter a valid email address" }),
+              }}
+            >
               {(field) => {
                 const isInvalid = field.state.meta.errors.length > 0;
                 return (
@@ -126,7 +136,12 @@ function EmployeeNew() {
                 );
               }}
             </form.Field>
-            <form.Field name="name">
+            <form.Field
+              name="name"
+              validators={{
+                onBlur: z.string().min(1, { error: "Name is required" }),
+              }}
+            >
               {(field) => {
                 const isInvalid = field.state.meta.errors.length > 0;
                 return (
@@ -136,7 +151,7 @@ function EmployeeNew() {
                       id={field.name}
                       name={field.name}
                       type="text"
-                      placeholder="Team members name"
+                      placeholder="Employee name"
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
@@ -206,11 +221,19 @@ function EmployeeNew() {
                 );
               }}
             </form.Field>
-            <form.Field name="password">
+            <form.Field
+              name="password"
+              validators={{
+                onBlur: z.string().min(8, { error: "Password must be at least 8 characters" }),
+              }}
+            >
               {(field) => {
                 const isInvalid = field.state.meta.errors.length > 0;
                 return (
-                  <Field data-invalid={isInvalid}>
+                  <Field
+                    data-invalid={isInvalid}
+                    data-testid="employees.new-form.password-input"
+                  >
                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                     <Input
                       id={field.name}
@@ -221,7 +244,6 @@ function EmployeeNew() {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      data-testid="employees.new-form.password-input"
                     />
                     {isInvalid && (
                       <FieldError
@@ -246,7 +268,7 @@ function EmployeeNew() {
               type="submit"
               variant="primary"
               className="flex-1"
-              disabled={form.state.isSubmitting}
+              disabled={!canCreate}
               data-testid="employees.new-form.create-btn"
             >
               Create User

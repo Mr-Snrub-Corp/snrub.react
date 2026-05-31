@@ -26,6 +26,7 @@ All three segments are **required**. Use kebab-case within each segment. Separat
 - **Unique**: the full three-part string must be unique within the domain
 - **Consistent element suffixes**: use `‑btn` for buttons, `‑input` for text/number/date inputs, `‑select` for dropdowns, `‑table` for tables, `‑link` for navigation anchors/router-links, `‑message` for inline feedback, `‑dialog` for modals
 - **Framework-agnostic**: the same convention applies to Vue, React, and Angular repos; copy this rule verbatim
+- **Bindings**: prefer static literals (`data-testid="..."`) in JSX. Expression bindings (`data-testid={...}`) are acceptable only when the value is a fixed string from static config (e.g. a `navItems` array). The rendered DOM value must still be stable and match the registered test ID. Bindings that incorporate runtime or user data are forbidden.
 
 ## Examples
 
@@ -39,6 +40,9 @@ All three segments are **required**. Use kebab-case within each segment. Separat
 <!-- Navigation -->
 <a data-testid="nav.sidebar.home-link" />
 <a data-testid="nav.sidebar.logout-btn" />
+
+<!-- Navigation via static config (e.g. navItems array) — expression binding OK -->
+<NavLink data-testid={item.testId} /> <!-- item.testId is a fixed string in the navItems array -->
 
 <!-- Employees feature -->
 <button data-testid="employees.list.add-btn" />
@@ -61,7 +65,8 @@ this.submitButton = page.getByTestId('auth.login-form.sign-in-btn')
 ## Do Not
 
 - Use the old flat kebab-case format: ~~`data-testid="email-input"`~~
-- Embed dynamic values: ~~`data-testid="`employee-${uid}`"`~~
+- Embed dynamic values: ~~`data-testid={\`employee-${uid}-delete-btn\`}`~~
+- Bind runtime or user data: ~~`data-testid={item.id}`~~, ~~`data-testid={index}`~~
 - Omit any of the three segments: ~~`data-testid="login.email-input"`~~
 - Use underscores or camelCase: ~~`data-testid="auth.loginForm.emailInput"`~~
 
@@ -71,7 +76,7 @@ this.submitButton = page.getByTestId('auth.login-form.sign-in-btn')
 
 Keep this section up to date whenever a new `data-testid` is added or removed.
 
-### Navigation — `src/components/DashboardSidebar.tsx`
+### Navigation — `src/components/DashboardSidebar.tsx` · `navItems` array
 
 | Test ID | Element | Status |
 |---|---|---|
@@ -150,3 +155,37 @@ Keep this section up to date whenever a new `data-testid` is added or removed.
 |---|---|---|
 | `incidents.types.category-group` | Category group container | ⏳ route not yet implemented |
 | `incidents.types.table` | Incident types data table | ⏳ route not yet implemented |
+
+### Shared — `src/components/DeleteConfirmDialog.tsx`
+
+| Test ID | Element | Status |
+|---|---|---|
+| `shared.delete-dialog.title` | Dialog title | ✅ implemented |
+| `shared.delete-dialog.description` | Dialog description | ✅ implemented |
+| `shared.delete-dialog.cancel-btn` | Cancel button | ✅ implemented |
+| `shared.delete-dialog.confirm-btn` | Confirm/destructive action button | ✅ implemented |
+
+### Reactor Monitoring — `src/pages/dashboard/reactor-monitoring/ReactorMonitoring.tsx` _(route not yet implemented)_
+
+| Test ID | Element | Status |
+|---|---|---|
+| `reactor-monitoring.dashboard.loading-message` | "Awaiting telemetry" loading state | ⏳ route not yet implemented |
+| `reactor-monitoring.dashboard.error-message` | Telemetry connection / parse error message | ⏳ route not yet implemented |
+| `reactor-monitoring.reactor-power.kpi-value` | Reactor power current value | ⏳ route not yet implemented |
+| `reactor-monitoring.reactor-power.status-badge` | Reactor power status badge | ⏳ route not yet implemented |
+| `reactor-monitoring.reactor-power.chart` | Reactor power line chart container | ⏳ route not yet implemented |
+| `reactor-monitoring.core-temperature.kpi-value` | Core temperature current value | ⏳ route not yet implemented |
+| `reactor-monitoring.core-temperature.status-badge` | Core temperature status badge | ⏳ route not yet implemented |
+| `reactor-monitoring.core-temperature.chart` | Core temperature line chart container | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-flow-rate.kpi-value` | Coolant flow rate current value | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-flow-rate.status-badge` | Coolant flow rate status badge | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-flow-rate.chart` | Coolant flow rate line chart container | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-pressure.kpi-value` | Coolant pressure current value | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-pressure.status-badge` | Coolant pressure status badge | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-pressure.chart` | Coolant pressure line chart container | ⏳ route not yet implemented |
+| `reactor-monitoring.radiation-level.kpi-value` | Radiation level current value | ⏳ route not yet implemented |
+| `reactor-monitoring.radiation-level.status-badge` | Radiation level status badge | ⏳ route not yet implemented |
+| `reactor-monitoring.radiation-level.chart` | Radiation level line chart container | ⏳ route not yet implemented |
+| `reactor-monitoring.containment-integrity.kpi-value` | Containment integrity current value | ⏳ route not yet implemented |
+| `reactor-monitoring.containment-integrity.status-badge` | Containment integrity status badge | ⏳ route not yet implemented |
+| `reactor-monitoring.containment-integrity.chart` | Containment integrity doughnut chart container | ⏳ route not yet implemented |

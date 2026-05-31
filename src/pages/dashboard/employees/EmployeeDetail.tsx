@@ -64,7 +64,7 @@ function EmployeeDetail() {
     <div className="bg-grey-50 dark:bg-grey-950 h-screen px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8">
       <div className="mb-4 flex items-center justify-between xl:w-3/4">
         <h1 className="text-grey-900 dark:text-grey-50 text-3xl font-bold">
-          Team Member
+          Employee Details
         </h1>
         {isAdmin && (
           <Button

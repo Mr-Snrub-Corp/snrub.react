@@ -45,7 +45,7 @@ function Employees() {
   return (
     <div className="bg-grey-50 dark:bg-grey-950 px-6 py-4 md:px-12 md:py-6 lg:px-20 lg:py-8">
       <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-3xl font-medium">Team</h1>
+        <h1 className="text-3xl font-medium">Employees</h1>
         {isSuperAdmin && (
           <Button
             variant="primary"
@@ -62,6 +62,7 @@ function Employees() {
             <TableHead>Photo</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
+            <TableHead>Role</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -77,6 +78,7 @@ function Employees() {
                 </TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
+                <TableCell>{user.role}</TableCell>
                 <TableCell className="text-right">
                   {/* Inline buttons: xl+ */}
                   <div className="hidden justify-end gap-1 xl:flex">
@@ -95,7 +97,9 @@ function Employees() {
                       variant="ghost"
                       size="icon-sm"
                       data-testid="employees.list.view-btn"
-                      onClick={() => navigate(`/dashboard/employees/${user.uid}`)}
+                      onClick={() =>
+                        navigate(`/dashboard/employees/${user.uid}`)
+                      }
                     >
                       <Eye />
                       <span className="sr-only">View</span>
@@ -116,8 +120,9 @@ function Employees() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem
-                        data-testid="employees.list.view-btn"
-                        onClick={() => navigate(`/dashboard/employees/${user.uid}`)}
+                        onClick={() =>
+                          navigate(`/dashboard/employees/${user.uid}`)
+                        }
                       >
                         View
                       </DropdownMenuItem>
@@ -126,7 +131,6 @@ function Employees() {
                           <DropdownMenuSeparator />
                           <DropdownMenuItem
                             variant="destructive"
-                            data-testid="employees.list.delete-btn"
                             onClick={() => setPendingDeleteUid(user.uid)}
                           >
                             Delete
@@ -143,7 +147,8 @@ function Employees() {
       </Table>
       <DeleteConfirmDialog
         open={pendingDeleteUid !== null}
-        header="Delete User"
+        header="Delete Employee"
+        description="Are you sure you want to delete this employee? This action cannot be undone."
         confirmButtonLabel="Delete"
         onClose={() => setPendingDeleteUid(null)}
         onConfirm={() => {

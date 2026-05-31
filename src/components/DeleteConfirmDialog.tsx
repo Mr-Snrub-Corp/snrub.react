@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 interface DeleteConfirmDialogProps {
   open: boolean;
   header: string;
+  description: string;
   confirmButtonLabel: string;
   onClose: () => void;
   onConfirm: () => void;
@@ -19,6 +20,7 @@ interface DeleteConfirmDialogProps {
 function DeleteConfirmDialog({
   open,
   header,
+  description,
   confirmButtonLabel,
   onClose,
   onConfirm,
@@ -27,19 +29,18 @@ function DeleteConfirmDialog({
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle data-testid="delete-confirm-dialog-title">
+          <DialogTitle data-testid="shared.delete-dialog.title">
             {header}
           </DialogTitle>
-          <DialogDescription data-testid="delete-confirm-dialog-description">
-            Are you sure you want to delete this user? This action cannot be
-            undone.
+          <DialogDescription data-testid="shared.delete-dialog.description">
+            {description}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:flex-row gap-2">
           <Button
             variant="outline"
             className="flex-1"
-            data-testid="delete-confirm-cancel-btn"
+            data-testid="shared.delete-dialog.cancel-btn"
             onClick={onClose}
           >
             Cancel
@@ -47,7 +48,7 @@ function DeleteConfirmDialog({
           <Button
             variant="destructive"
             className="flex-1"
-            data-testid="delete-confirm-submit-btn"
+            data-testid="shared.delete-dialog.confirm-btn"
             onClick={onConfirm}
           >
             {confirmButtonLabel}
