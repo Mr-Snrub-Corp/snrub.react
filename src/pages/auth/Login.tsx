@@ -25,7 +25,7 @@ function Login() {
   }, []);
 
   const [serverError, setServerError] = useState("");
-  const login = useAuthStore((state) => state.login);
+  const login = useAuthStore((s) => s.login);
   let navigate = useNavigate();
 
   const form = useForm({
@@ -81,7 +81,6 @@ function Login() {
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
-                      data-testid="auth.login-form.email-input"
                     />
                     {isInvalid && (
                       <FieldError
@@ -111,7 +110,6 @@ function Login() {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                       autoComplete="current-password"
-                      data-testid="auth.login-form.password-input"
                     />
                     {isInvalid && (
                       <FieldError
@@ -132,14 +130,13 @@ function Login() {
               variant="ghost"
               size="sm"
               className="text-primary"
-              data-testid="auth.login-form.forgot-password-btn"
             >
               <Link to="/auth/forgot-password">Forgot password?</Link>
             </Button>
           </div>
 
           {serverError && (
-            <p role="alert" className="text-destructive mb-4 text-sm" data-testid="auth.login-form.error-message">
+            <p role="alert" className="text-destructive mb-4 text-sm">
               {serverError}
             </p>
           )}
@@ -149,7 +146,6 @@ function Login() {
             variant="primary"
             className="w-full"
             disabled={form.state.isSubmitting}
-            data-testid="auth.login-form.sign-in-btn"
           >
             Sign in
           </Button>

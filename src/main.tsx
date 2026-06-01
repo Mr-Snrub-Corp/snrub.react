@@ -10,10 +10,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword.tsx";
 import ResetPassword from "./pages/auth/ResetPassword.tsx";
 
 import DashboardHome from "./pages/dashboard/DashboardHome.tsx";
-import Employees from "./pages/dashboard/employees/Employees.tsx";
-import EmployeeDetail from "./pages/dashboard/employees/EmployeeDetail.tsx";
-import EmployeeEdit from "./pages/dashboard/employees/EmployeeEdit.tsx";
-import EmployeeNew from "./pages/dashboard/employees/EmployeeNew.tsx";
+import Team from "./pages/dashboard/Team.tsx";
 import Incidents from "./pages/dashboard/Incidents.tsx";
 import { useAuthStore } from "@/stores/auth";
 
@@ -40,10 +37,7 @@ const router = createBrowserRouter([
     loader: requireAuth,
     children: [
       { path: "/dashboard", element: <DashboardHome /> },
-      { path: "/dashboard/employees", element: <Employees /> },
-      { path: "/dashboard/employees/new", element: <EmployeeNew /> },
-      { path: "/dashboard/employees/:uid", element: <EmployeeDetail /> },
-      { path: "/dashboard/employees/:uid/edit", element: <EmployeeEdit /> },
+      { path: "/dashboard/team", element: <Team /> },
       { path: "/dashboard/incidents", element: <Incidents /> },
     ],
   },
