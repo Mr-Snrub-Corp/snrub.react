@@ -14,7 +14,8 @@ import Employees from "./pages/dashboard/employees/Employees.tsx";
 import EmployeeDetail from "./pages/dashboard/employees/EmployeeDetail.tsx";
 import EmployeeEdit from "./pages/dashboard/employees/EmployeeEdit.tsx";
 import EmployeeNew from "./pages/dashboard/employees/EmployeeNew.tsx";
-import Incidents from "./pages/dashboard/Incidents.tsx";
+import Incidents from "./pages/dashboard/incidents/Incidents.tsx";
+import IncidentTypes from "./pages/dashboard/incidents/IncidentTypes.tsx";
 import { useAuthStore } from "@/stores/auth";
 
 async function requireAuth() {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: "/dashboard/employees/:uid", element: <EmployeeDetail /> },
       { path: "/dashboard/employees/:uid/edit", element: <EmployeeEdit /> },
       { path: "/dashboard/incidents", element: <Incidents /> },
+      { path: "/dashboard/incidents/types", element: <IncidentTypes /> },
     ],
   },
 ]);

@@ -1,4 +1,16 @@
 /**
+ * Formats an ISO date string to a human-readable date.
+ * e.g. "2026-06-01T00:00:00Z" -> "June 1, 2026"
+ */
+export function formatDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+/**
  * Converts a snake_case string to Title Case.
  * e.g. "emergency_state_declared" -> "Emergency State Declared"
  */

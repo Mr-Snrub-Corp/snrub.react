@@ -7,7 +7,9 @@ import { incidentReportsApi } from "@/services/api";
 interface IncidentReportsState {
   incidentReports: Record<string, IncidentReport>;
   setReports: (reports: IncidentReport[]) => void;
-  fetchReports: (params?: Record<string, string>) => Promise<void>;
+  fetchReports: (
+    params?: Record<string, string | number | string[]>,
+  ) => Promise<void>;
   reset: () => void;
 }
 
@@ -17,18 +19,15 @@ export const useIncidentReportsStore = create<IncidentReportsState>()(
       incidentReports: {},
       setReports: (reports) =>
         set({
-          incidentReports: Object.fromEntries(
-            reports.map((r) => [r.uid, r]),
-          ),
+          incidentReports: Object.fromEntries(reports.map((r) => [r.uid, r])),
         }),
       reset: () => set({ incidentReports: {} }),
       fetchReports: async (params?) => {
         try {
-          const reports: IncidentReport[] = await incidentReportsApi.get(params);
+          const reports: IncidentReport[] =
+            await incidentReportsApi.get(params);
           set({
-            incidentReports: Object.fromEntries(
-              reports.map((r) => [r.uid, r]),
-            ),
+            incidentReports: Object.fromEntries(reports.map((r) => [r.uid, r])),
           });
         } catch (error) {
           const message = isAxiosError(error)

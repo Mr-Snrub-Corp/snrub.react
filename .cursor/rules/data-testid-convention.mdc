@@ -149,12 +149,20 @@ Keep this section up to date whenever a new `data-testid` is added or removed.
 | `employees.edit-form.update-btn` | Update/save button | ✅ implemented |
 | `employees.edit-form.cancel-btn` | Cancel button | ✅ implemented |
 
-### Incidents — `src/pages/dashboard/incidents/IncidentTypes.tsx` _(route not yet implemented)_
+### Incidents — `src/pages/dashboard/incidents/Incidents.tsx`
 
 | Test ID | Element | Status |
 |---|---|---|
-| `incidents.types.category-group` | Category group container | ⏳ route not yet implemented |
-| `incidents.types.table` | Incident types data table | ⏳ route not yet implemented |
+| `incidents.list.incident-types-btn` | "Incident Types" nav button | ✅ implemented |
+| `incidents.list.incident-reports-btn` | "Incident Reports" nav button (admin only) | ✅ implemented |
+| `incidents.list.view-btn` | Per-row view/eye button | ✅ implemented |
+
+### Incidents — `src/pages/dashboard/incidents/IncidentTypes.tsx`
+
+| Test ID | Element | Status |
+|---|---|---|
+| `incidents.types.category-group` | Category group container | ✅ implemented |
+| `incidents.types.table` | Incident types data table | ✅ implemented |
 
 ### Shared — `src/components/DeleteConfirmDialog.tsx`
 
