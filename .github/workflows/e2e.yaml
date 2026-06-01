@@ -1,0 +1,17 @@
+name: Trigger E2E
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    trigger:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Dispatch to snrub.e2e
+              uses: peter-evans/repository-dispatch@v3
+              with:
+                  token: ${{ secrets.E2E_DISPATCH_TOKEN }}
+                  repository: Mr-Snrub-Corp/snrub.e2e
+                  event-type: react-pr
+                  client-payload: '{"react_ref": "${{ github.head_ref }}"}'
