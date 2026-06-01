@@ -42,6 +42,10 @@ If you write code, something must call it. If nothing calls it, don't write it.
 
 After every code change, validate the build succeeds: run `npm run build` (or the project build script) before considering the task complete.
 
+### Formatting
+
+Run `npx prettier --write <file>` on every file created or edited before finishing. This keeps AI-generated files in sync with format-on-save so saves produce no diff.
+
 ### E2E Tests
 
 - Add `data-testid` to all interactive elements (buttons, links, inputs, selects, modals, toggles).
