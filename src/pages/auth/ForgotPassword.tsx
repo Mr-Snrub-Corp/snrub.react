@@ -29,6 +29,7 @@ function ForgotPassword() {
       try {
         authApi.requestPasswordReset({ email: value.email });
         toast.success("Success", {
+          testId: "auth.forgot-password.success-toast",
           description:
             "If your email is registered, you will receive a password reset link",
           position: "top-right",
