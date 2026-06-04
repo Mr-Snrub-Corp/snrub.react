@@ -14,11 +14,11 @@ data-testid="domain.component.element-type"
 
 All three segments are **required**. Use kebab-case within each segment. Separate segments with `.`.
 
-| Segment | Description | Examples |
-|---|---|---|
-| `domain` | Feature area or route domain | `auth`, `nav`, `employees`, `incidents`, `reporting` |
-| `component` | The specific component or form within that domain | `login-form`, `sidebar`, `list`, `detail`, `edit-form` |
-| `element-type` | What the element is and/or does | `email-input`, `submit-btn`, `table`, `error-message`, `back-btn` |
+| Segment        | Description                                       | Examples                                                          |
+| -------------- | ------------------------------------------------- | ----------------------------------------------------------------- |
+| `domain`       | Feature area or route domain                      | `auth`, `nav`, `employees`, `incidents`, `reporting`              |
+| `component`    | The specific component or form within that domain | `login-form`, `sidebar`, `list`, `detail`, `edit-form`            |
+| `element-type` | What the element is and/or does                   | `email-input`, `submit-btn`, `table`, `error-message`, `back-btn` |
 
 ## Rules
 
@@ -42,7 +42,8 @@ All three segments are **required**. Use kebab-case within each segment. Separat
 <a data-testid="nav.sidebar.logout-btn" />
 
 <!-- Navigation via static config (e.g. navItems array) — expression binding OK -->
-<NavLink data-testid={item.testId} /> <!-- item.testId is a fixed string in the navItems array -->
+<NavLink data-testid="{item.testId}" />
+<!-- item.testId is a fixed string in the navItems array -->
 
 <!-- Employees feature -->
 <button data-testid="employees.list.add-btn" />
@@ -58,8 +59,8 @@ All three segments are **required**. Use kebab-case within each segment. Separat
 Reference test IDs using the full dot-notation string:
 
 ```ts
-this.emailInput = page.getByTestId('auth.login-form.email-input')
-this.submitButton = page.getByTestId('auth.login-form.sign-in-btn')
+this.emailInput = page.getByTestId("auth.login-form.email-input");
+this.submitButton = page.getByTestId("auth.login-form.sign-in-btn");
 ```
 
 ## Do Not
@@ -78,122 +79,123 @@ Keep this section up to date whenever a new `data-testid` is added or removed.
 
 ### Navigation — `src/components/DashboardSidebar.tsx` · `navItems` array
 
-| Test ID | Element | Status |
-|---|---|---|
-| `nav.sidebar.home-link` | Home nav link | ✅ implemented |
-| `nav.sidebar.employees-link` | Employees nav link | ✅ implemented |
-| `nav.sidebar.incidents-link` | Incidents nav link | ✅ implemented |
-| `nav.sidebar.design-link` | Design nav link | ⏳ route not yet implemented |
-| `nav.sidebar.reporting-link` | Reporting nav link | ⏳ route not yet implemented |
+| Test ID                               | Element                     | Status                       |
+| ------------------------------------- | --------------------------- | ---------------------------- |
+| `nav.sidebar.home-link`               | Home nav link               | ✅ implemented               |
+| `nav.sidebar.employees-link`          | Employees nav link          | ✅ implemented               |
+| `nav.sidebar.incidents-link`          | Incidents nav link          | ✅ implemented               |
+| `nav.sidebar.design-link`             | Design nav link             | ⏳ route not yet implemented |
+| `nav.sidebar.reporting-link`          | Reporting nav link          | ⏳ route not yet implemented |
 | `nav.sidebar.reactor-monitoring-link` | Reactor Monitoring nav link | ⏳ route not yet implemented |
-| `nav.sidebar.logout-btn` | Logout button | ✅ implemented |
+| `nav.sidebar.logout-btn`              | Logout button               | ✅ implemented               |
 
 ### Auth — `src/pages/auth/Login.tsx`
 
-| Test ID | Element | Status |
-|---|---|---|
-| `auth.login-form.email-input` | Email input | ✅ implemented |
-| `auth.login-form.password-input` | Password input | ✅ implemented |
+| Test ID                               | Element                     | Status         |
+| ------------------------------------- | --------------------------- | -------------- |
+| `auth.login-form.email-input`         | Email input                 | ✅ implemented |
+| `auth.login-form.password-input`      | Password input              | ✅ implemented |
 | `auth.login-form.forgot-password-btn` | Forgot password link-button | ✅ implemented |
-| `auth.login-form.sign-in-btn` | Sign in submit button | ✅ implemented |
-| `auth.login-form.error-message` | Inline error message | ✅ implemented |
+| `auth.login-form.sign-in-btn`         | Sign in submit button       | ✅ implemented |
+| `auth.login-form.error-message`       | Inline error message        | ✅ implemented |
 
 ### Auth — `src/pages/auth/ForgotPassword.tsx`
 
-| Test ID | Element | Status |
-|---|---|---|
-| `auth.forgot-password-form.email-input` | Email input | ✅ implemented |
+| Test ID                                       | Element              | Status         |
+| --------------------------------------------- | -------------------- | -------------- |
+| `auth.forgot-password-form.email-input`       | Email input          | ✅ implemented |
 | `auth.forgot-password-form.back-to-login-btn` | Back to login button | ✅ implemented |
-| `auth.forgot-password-form.submit-btn` | Submit button | ✅ implemented |
+| `auth.forgot-password-form.submit-btn`        | Submit button        | ✅ implemented |
+| `auth.forgot-password.success-toast`          | Success toast        | ✅ implemented |
 
 ### Employees — `src/pages/dashboard/employees/Employees.tsx`
 
-| Test ID | Element | Status |
-|---|---|---|
-| `employees.list.add-btn` | Add employee button | ✅ implemented |
-| `employees.list.table` | Employees data table | ✅ implemented |
-| `employees.list.delete-btn` | Per-row delete button | ✅ implemented |
-| `employees.list.view-btn` | Per-row view/detail button | ✅ implemented |
+| Test ID                     | Element                    | Status         |
+| --------------------------- | -------------------------- | -------------- |
+| `employees.list.add-btn`    | Add employee button        | ✅ implemented |
+| `employees.list.table`      | Employees data table       | ✅ implemented |
+| `employees.list.delete-btn` | Per-row delete button      | ✅ implemented |
+| `employees.list.view-btn`   | Per-row view/detail button | ✅ implemented |
 
 ### Employees — `src/pages/dashboard/employees/EmployeeDetail.tsx`
 
-| Test ID | Element | Status |
-|---|---|---|
-| `employees.detail.edit-btn` | Edit button | ✅ implemented |
-| `employees.detail.name` | Employee name display | ✅ implemented |
-| `employees.detail.email` | Employee email display | ✅ implemented |
-| `employees.detail.role` | Employee role tag | ✅ implemented |
-| `employees.detail.status` | Employee status tag | ✅ implemented |
-| `employees.detail.back-btn` | Back button | ✅ implemented |
+| Test ID                     | Element                | Status         |
+| --------------------------- | ---------------------- | -------------- |
+| `employees.detail.edit-btn` | Edit button            | ✅ implemented |
+| `employees.detail.name`     | Employee name display  | ✅ implemented |
+| `employees.detail.email`    | Employee email display | ✅ implemented |
+| `employees.detail.role`     | Employee role tag      | ✅ implemented |
+| `employees.detail.status`   | Employee status tag    | ✅ implemented |
+| `employees.detail.back-btn` | Back button            | ✅ implemented |
 
 ### Employees — `src/pages/dashboard/employees/EmployeeNew.tsx`
 
-| Test ID | Element | Status |
-|---|---|---|
-| `employees.new-form.email-input` | Email input | ✅ implemented |
-| `employees.new-form.name-input` | Name input | ✅ implemented |
-| `employees.new-form.role-select` | Role dropdown | ✅ implemented |
-| `employees.new-form.status-select` | Status dropdown | ✅ implemented |
-| `employees.new-form.password-input` | Password input | ✅ implemented |
-| `employees.new-form.create-btn` | Create employee submit button | ✅ implemented |
-| `employees.new-form.cancel-btn` | Cancel button | ✅ implemented |
+| Test ID                             | Element                       | Status         |
+| ----------------------------------- | ----------------------------- | -------------- |
+| `employees.new-form.email-input`    | Email input                   | ✅ implemented |
+| `employees.new-form.name-input`     | Name input                    | ✅ implemented |
+| `employees.new-form.role-select`    | Role dropdown                 | ✅ implemented |
+| `employees.new-form.status-select`  | Status dropdown               | ✅ implemented |
+| `employees.new-form.password-input` | Password input                | ✅ implemented |
+| `employees.new-form.create-btn`     | Create employee submit button | ✅ implemented |
+| `employees.new-form.cancel-btn`     | Cancel button                 | ✅ implemented |
 
 ### Employees — `src/pages/dashboard/employees/EmployeeEdit.tsx`
 
-| Test ID | Element | Status |
-|---|---|---|
-| `employees.edit-form.email-input` | Email input | ✅ implemented |
-| `employees.edit-form.name-input` | Name input | ✅ implemented |
-| `employees.edit-form.role-select` | Role dropdown | ✅ implemented |
-| `employees.edit-form.status-select` | Status dropdown | ✅ implemented |
-| `employees.edit-form.update-btn` | Update/save button | ✅ implemented |
-| `employees.edit-form.cancel-btn` | Cancel button | ✅ implemented |
+| Test ID                             | Element            | Status         |
+| ----------------------------------- | ------------------ | -------------- |
+| `employees.edit-form.email-input`   | Email input        | ✅ implemented |
+| `employees.edit-form.name-input`    | Name input         | ✅ implemented |
+| `employees.edit-form.role-select`   | Role dropdown      | ✅ implemented |
+| `employees.edit-form.status-select` | Status dropdown    | ✅ implemented |
+| `employees.edit-form.update-btn`    | Update/save button | ✅ implemented |
+| `employees.edit-form.cancel-btn`    | Cancel button      | ✅ implemented |
 
 ### Incidents — `src/pages/dashboard/incidents/Incidents.tsx`
 
-| Test ID | Element | Status |
-|---|---|---|
-| `incidents.list.incident-types-btn` | "Incident Types" nav button | ✅ implemented |
+| Test ID                               | Element                                    | Status         |
+| ------------------------------------- | ------------------------------------------ | -------------- |
+| `incidents.list.incident-types-btn`   | "Incident Types" nav button                | ✅ implemented |
 | `incidents.list.incident-reports-btn` | "Incident Reports" nav button (admin only) | ✅ implemented |
-| `incidents.list.view-btn` | Per-row view/eye button | ✅ implemented |
+| `incidents.list.view-btn`             | Per-row view/eye button                    | ✅ implemented |
 
 ### Incidents — `src/pages/dashboard/incidents/IncidentTypes.tsx`
 
-| Test ID | Element | Status |
-|---|---|---|
-| `incidents.types.category-group` | Category group container | ✅ implemented |
-| `incidents.types.table` | Incident types data table | ✅ implemented |
+| Test ID                          | Element                   | Status         |
+| -------------------------------- | ------------------------- | -------------- |
+| `incidents.types.category-group` | Category group container  | ✅ implemented |
+| `incidents.types.table`          | Incident types data table | ✅ implemented |
 
 ### Shared — `src/components/DeleteConfirmDialog.tsx`
 
-| Test ID | Element | Status |
-|---|---|---|
-| `shared.delete-dialog.title` | Dialog title | ✅ implemented |
-| `shared.delete-dialog.description` | Dialog description | ✅ implemented |
-| `shared.delete-dialog.cancel-btn` | Cancel button | ✅ implemented |
+| Test ID                            | Element                           | Status         |
+| ---------------------------------- | --------------------------------- | -------------- |
+| `shared.delete-dialog.title`       | Dialog title                      | ✅ implemented |
+| `shared.delete-dialog.description` | Dialog description                | ✅ implemented |
+| `shared.delete-dialog.cancel-btn`  | Cancel button                     | ✅ implemented |
 | `shared.delete-dialog.confirm-btn` | Confirm/destructive action button | ✅ implemented |
 
 ### Reactor Monitoring — `src/pages/dashboard/reactor-monitoring/ReactorMonitoring.tsx` _(route not yet implemented)_
 
-| Test ID | Element | Status |
-|---|---|---|
-| `reactor-monitoring.dashboard.loading-message` | "Awaiting telemetry" loading state | ⏳ route not yet implemented |
-| `reactor-monitoring.dashboard.error-message` | Telemetry connection / parse error message | ⏳ route not yet implemented |
-| `reactor-monitoring.reactor-power.kpi-value` | Reactor power current value | ⏳ route not yet implemented |
-| `reactor-monitoring.reactor-power.status-badge` | Reactor power status badge | ⏳ route not yet implemented |
-| `reactor-monitoring.reactor-power.chart` | Reactor power line chart container | ⏳ route not yet implemented |
-| `reactor-monitoring.core-temperature.kpi-value` | Core temperature current value | ⏳ route not yet implemented |
-| `reactor-monitoring.core-temperature.status-badge` | Core temperature status badge | ⏳ route not yet implemented |
-| `reactor-monitoring.core-temperature.chart` | Core temperature line chart container | ⏳ route not yet implemented |
-| `reactor-monitoring.coolant-flow-rate.kpi-value` | Coolant flow rate current value | ⏳ route not yet implemented |
-| `reactor-monitoring.coolant-flow-rate.status-badge` | Coolant flow rate status badge | ⏳ route not yet implemented |
-| `reactor-monitoring.coolant-flow-rate.chart` | Coolant flow rate line chart container | ⏳ route not yet implemented |
-| `reactor-monitoring.coolant-pressure.kpi-value` | Coolant pressure current value | ⏳ route not yet implemented |
-| `reactor-monitoring.coolant-pressure.status-badge` | Coolant pressure status badge | ⏳ route not yet implemented |
-| `reactor-monitoring.coolant-pressure.chart` | Coolant pressure line chart container | ⏳ route not yet implemented |
-| `reactor-monitoring.radiation-level.kpi-value` | Radiation level current value | ⏳ route not yet implemented |
-| `reactor-monitoring.radiation-level.status-badge` | Radiation level status badge | ⏳ route not yet implemented |
-| `reactor-monitoring.radiation-level.chart` | Radiation level line chart container | ⏳ route not yet implemented |
-| `reactor-monitoring.containment-integrity.kpi-value` | Containment integrity current value | ⏳ route not yet implemented |
-| `reactor-monitoring.containment-integrity.status-badge` | Containment integrity status badge | ⏳ route not yet implemented |
-| `reactor-monitoring.containment-integrity.chart` | Containment integrity doughnut chart container | ⏳ route not yet implemented |
+| Test ID                                                 | Element                                        | Status                       |
+| ------------------------------------------------------- | ---------------------------------------------- | ---------------------------- |
+| `reactor-monitoring.dashboard.loading-message`          | "Awaiting telemetry" loading state             | ⏳ route not yet implemented |
+| `reactor-monitoring.dashboard.error-message`            | Telemetry connection / parse error message     | ⏳ route not yet implemented |
+| `reactor-monitoring.reactor-power.kpi-value`            | Reactor power current value                    | ⏳ route not yet implemented |
+| `reactor-monitoring.reactor-power.status-badge`         | Reactor power status badge                     | ⏳ route not yet implemented |
+| `reactor-monitoring.reactor-power.chart`                | Reactor power line chart container             | ⏳ route not yet implemented |
+| `reactor-monitoring.core-temperature.kpi-value`         | Core temperature current value                 | ⏳ route not yet implemented |
+| `reactor-monitoring.core-temperature.status-badge`      | Core temperature status badge                  | ⏳ route not yet implemented |
+| `reactor-monitoring.core-temperature.chart`             | Core temperature line chart container          | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-flow-rate.kpi-value`        | Coolant flow rate current value                | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-flow-rate.status-badge`     | Coolant flow rate status badge                 | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-flow-rate.chart`            | Coolant flow rate line chart container         | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-pressure.kpi-value`         | Coolant pressure current value                 | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-pressure.status-badge`      | Coolant pressure status badge                  | ⏳ route not yet implemented |
+| `reactor-monitoring.coolant-pressure.chart`             | Coolant pressure line chart container          | ⏳ route not yet implemented |
+| `reactor-monitoring.radiation-level.kpi-value`          | Radiation level current value                  | ⏳ route not yet implemented |
+| `reactor-monitoring.radiation-level.status-badge`       | Radiation level status badge                   | ⏳ route not yet implemented |
+| `reactor-monitoring.radiation-level.chart`              | Radiation level line chart container           | ⏳ route not yet implemented |
+| `reactor-monitoring.containment-integrity.kpi-value`    | Containment integrity current value            | ⏳ route not yet implemented |
+| `reactor-monitoring.containment-integrity.status-badge` | Containment integrity status badge             | ⏳ route not yet implemented |
+| `reactor-monitoring.containment-integrity.chart`        | Containment integrity doughnut chart container | ⏳ route not yet implemented |
