@@ -1,73 +1,73 @@
-# React + TypeScript + Vite
+# snrub.react
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React SPA for the Snrub Corp Nuclear Power Plant dashboard. Built with React 19, Vite 7, TypeScript, and React Router 7. Talks to the Python API in [snrub.api](https://github.com/Mr-Snrub-Corp/snrub.api).
 
-Currently, two official plugins are available:
+## Project structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```
+snrub.react/
+├── public/                 # Static assets served as-is
+├── src/
+│   ├── components/
+│   │   └── ui/             # shadcn/ui components (owned source)
+│   ├── constants/          # Shared constants (roles, statuses, etc.)
+│   ├── hooks/              # Reusable React hooks
+│   ├── layouts/            # Auth and dashboard layouts
+│   ├── lib/                # Shared utilities (e.g. cn())
+│   ├── pages/              # Route-level views (auth/, dashboard/)
+│   ├── services/           # HTTP client and API calls
+│   ├── stores/             # Client state (Zustand)
+│   ├── test/               # Vitest setup
+│   ├── types/              # TypeScript type definitions
+│   ├── utils/              # Pure helper functions
+│   ├── App.tsx             # Root layout
+│   ├── main.tsx            # Entry point and route definitions
+│   └── index.css           # Tailwind theme and global styles
+├── components.json         # shadcn/ui CLI config
+├── Dockerfile
+└── package.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Local development
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+This repo is run as the **React frontend** alongside the API. Docker Compose lives in [snrub.api](https://github.com/Mr-Snrub-Corp/snrub.api) — see its [README](https://github.com/Mr-Snrub-Corp/snrub.api#local-development) for full setup.
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+1. Clone both repos into adjacent folders:
 
-## AI Coding
+   ```
+   parent/
+   ├── snrub.api/
+   └── snrub.react/
+   ```
 
-collaborators should run npx skills install if they want to update skills in the future.
+2. Follow the snrub.api local development steps (env file, Docker Compose, migrations, etc.).
+
+3. Start the stack with the React profile:
+
+   ```bash
+   COMPOSE_PROFILES=react docker compose up -d --build
+   ```
+
+   Or set `COMPOSE_PROFILES=react` in the `.env` next to `docker-compose.yaml` in snrub.api.
+
+The client is served by Docker as part of that stack. API docs: http://localhost:8000/docs
+
+## End-to-End Tests
+
+E2E tests live in [`Mr-Snrub-Corp/snrub.e2e`](https://github.com/Mr-Snrub-Corp/snrub.e2e) — not this repo. This allows the same test suite to run against the Vue, React, and Angular versions of the app.
+
+On pull request, `.github/workflows/e2e.yaml` dispatches a `react-pr` event to `snrub.e2e` with the branch name. Results appear in the `snrub.e2e` Actions tab.
+
+## Scripts
+
+| Command             | Description                    |
+| ------------------- | ------------------------------ |
+| `npm run dev`       | Vite dev server with HMR       |
+| `npm run build`     | Typecheck and production build |
+| `npm run lint`      | ESLint                         |
+| `npm run test:unit` | Vitest unit tests              |
+| `npm run preview`   | Preview production build       |
+
+## AI coding
+
+Collaborators can run `npx skills install` to update agent skills.
